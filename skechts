@@ -1,0 +1,181 @@
+
+var tlfSite;
+
+function setup() {
+
+  tlfSite = new IndtastTLF();
+  createCanvas(1280, 720);
+  
+  
+}
+
+function draw() {
+  background(220);
+  rect(0,0,width,100);
+  rect(0,height-50,width,50);
+  tlfSite.draw();
+
+}
+
+function mouseClicked(){
+
+}
+
+function keyPressed() {
+
+ 
+ 
+}
+
+class IndtastTLF{
+  constructor(){
+  this.btnNo =  new Button(620,500,170,35,false,"Nej, Ønsker ikke at svare på spørgeskema");
+  this.btnYes =  new Button(800,500,170,35,false,"Ja, deltag i spørgeskema");
+  this.tf = new Textfield(300,100,200,50,false,"test");
+  }
+  
+  draw(){
+    rect(290,140,700,415);
+    this.btnNo.drawbtn();
+    this.btnYes.drawbtn();
+  }
+  
+}
+
+
+
+class Button{
+  
+  constructor(xPos,yPos,sizeX,sizeY,hidden,btnText){
+  this.xPos = xPos;
+  this.yPos = yPos;
+  this.sizeX = sizeX;
+  this.sizeY = sizeY;
+  this.hidden = hidden;
+  this.btnText = btnText;
+  
+  
+  }
+  
+   drawbtn(){
+    if(!this.hidden){
+      rect(this.xPos,this.yPos,this.sizeX,this.sizeY);
+      text(this.btnText, this.xPos + this.sizeX/2- textWidth(this.btnText)/2 ,this.yPos+ this.sizeY/2);
+    }
+      
+  }
+  
+  checkIfClicked(mx, my){
+      if (mx > this.xPos &&
+                mx < this.xPos + this.sizeX &&
+                my > this.yPos &&
+                my < this.yPos + this.sizeY) {
+                btn.onClicked();
+            
+        }
+  }
+   
+  onClicked(){
+      
+  }
+  
+  
+
+}
+
+
+
+class Textfield{
+  constructor(xPos,yPos,sizeX,sizeY,hidden,text){
+  this.xPos = xPos;
+  this.yPos = yPos;
+  this.sizeX = sizeX;
+  this.sizeY = sizeY;
+  this.hidden = hidden;
+  this.text = text;
+  this.input = "Indsæt";
+  }
+  
+  drawbtn(){
+      if(!this.hidden){
+      
+      rect(this.xPos,this.yPos,this.sizeX,this.sizeY); 
+      text(this.text, this.xPos,this.yPos);
+      text(this.input, this.xPos + this.sizeX/2- textWidth(this.input)/2 ,this.yPos+ this.sizeY/2); 
+      }
+      
+    }
+  
+  checkIfClicked(mx, my){
+        if (mx > this.xPos &&
+                mx < this.xPos + this.sizeX &&
+                my > this.yPos &&
+                my < this.yPos + this.sizeY) {
+                this.clicked = true;
+            
+          }else{ 
+            this.clicked = false;
+          }
+    }
+   
+    textInput(key,keyCode ){
+      if(this.clicked ){
+        if(keyCode === BACKSPACE || keyCode === DELETE){
+          this.input = this.input.substring(0,this.input.length-2);
+        }else if(keyCode >47 && keyCode < 91){
+               this.input = this.input + key;
+            }
+      }
+    }
+  
+  
+}
+
+/*
+
+
+function createTextFeild(x,y,sX,sY,h,c){
+  return {
+    xPos: x, 
+    yPos: y, 
+    sizeX: sX,
+    sizeY: sY,
+    hidden: h,
+    text: c,
+    input: "Indsæt",
+    clicked: false,
+
+    drawbtn: function(){
+      if(!this.hidden){
+      
+      rect(this.xPos,this.yPos,this.sizeX,this.sizeY); 
+      text(this.text, this.xPos,this.yPos);
+      text(this.input, this.xPos + this.sizeX/2- textWidth(this.input)/2 ,this.yPos+ this.sizeY/2); 
+      }
+      
+    },
+  
+    checkIfClicked: function(mx, my){
+        if (mx > this.xPos &&
+                mx < this.xPos + this.sizeX &&
+                my > this.yPos &&
+                my < this.yPos + this.sizeY) {
+                this.clicked = true;
+            
+          }else{ 
+            this.clicked = false;
+          }
+    },
+   
+    textInput: function(key,keyCode ){
+      if(this.clicked ){
+        if(keyCode === BACKSPACE || keyCode === DELETE){
+          this.input = this.input.substring(0,this.input.length-2);
+        }else if(keyCode >47 && keyCode < 91){
+               this.input = this.input + key;
+            }
+      }
+    },
+    
+  };
+}*/
